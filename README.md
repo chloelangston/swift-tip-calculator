@@ -28,8 +28,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img width="300px" src='http://i.imgur.com/K2Par9X.gif' title='Tipulator Video Walkthrough' width='' alt='Video Walkthrough' />
-
+<img width="300px" src='http://i.imgur.com/yunUWT3.gif' title='Tipulator Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
 ## Project Analysis
