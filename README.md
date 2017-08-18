@@ -4,7 +4,7 @@
 
 Submitted by: **Chloe Langston**
 
-Time spent: **12** hours spent in total
+Time spent: **11** hours spent in total
 
 ## User Stories
 
