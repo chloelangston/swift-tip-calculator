@@ -12,6 +12,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var tipDefaultInput: UITextField!
     @IBOutlet weak var tipDefaultInput2: UITextField!
     @IBOutlet weak var tipDefaultInput3: UITextField!
+    @IBOutlet weak var themeControl: UISegmentedControl!
     
     let defaults = UserDefaults.standard
     
@@ -21,6 +22,8 @@ class SettingsViewController: UIViewController {
         tipDefaultInput2.text = defaults.string(forKey: "default2")
         tipDefaultInput3.text = defaults.string(forKey: "default3")
         // Do any additional setup after loading the view.
+        
+        themeControl.selectedSegmentIndex = defaults.integer(forKey: "theme")
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +53,17 @@ class SettingsViewController: UIViewController {
         defaults.set(default3, forKey: "default3" )
         defaults.synchronize()
     }
+    
+     @IBAction func changeTheme(_ sender: AnyObject) {
+        if (themeControl.selectedSegmentIndex == 0) {
+            print("fun")
+            defaults.set(0, forKey: "theme" )
+        }
+        if (themeControl.selectedSegmentIndex == 1) {
+            print("plain")
+            defaults.set(1, forKey: "theme" )
+        }
+     }
     /*
     // MARK: - Navigation
 
