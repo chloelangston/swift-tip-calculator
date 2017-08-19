@@ -23,8 +23,9 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("view will appear")
         
+        // retrieve default tip amounts from defaults storage
+        // if it does not exist yet in storage, then set the default tip amounts manually
         if(defaults.object(forKey: "default1") == nil){
             let default1 = String(18)
             tipControl.setTitle(default1, forSegmentAt: 0)
@@ -52,22 +53,21 @@ class ViewController: UIViewController {
             tipControl.setTitle(default3, forSegmentAt: 2)
         }
         
-        
+        // if the theme setting does not exist in storage, then add it to storage with the fun theme as default
         if (defaults.string(forKey: "theme") == nil) {
             defaults.set(0, forKey: "theme" )
-            print("if there's no theme")
         }
         
+        // if the first segmented control option is selected, make the background purple
         if (defaults.integer(forKey: "theme") == 0) {
             self.view.backgroundColor = funPurple
             self.billField.backgroundColor = funPurple
-            print("if theme is fun")
         }
         
+        // if the second segmented control option is selected, make the background white
         else if (defaults.integer(forKey: "theme") == 1) {
             self.view.backgroundColor = UIColor.black
             self.billField.backgroundColor = UIColor.black
-            print("if theme is plain")
         }
     }
     
@@ -95,9 +95,11 @@ class ViewController: UIViewController {
         
         // animate
         UIView.animate(withDuration: 2, animations: {
+            
             // elements will fade in
             self.totalLabel.alpha = 1
             self.totalTitleLabel.alpha = 1
+            
             // elements will slide up
             self.totalLabel.frame = CGRect(x: xPosition, y: yPosition, width: width, height: height)
             self.totalTitleLabel.frame = CGRect(x: xPositionTitle, y: yPositionTitle, width: widthTitle, height: heightTitle)
@@ -114,7 +116,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // on opening of app, keyboard will be up and user can immediately start typing in the bill field
         billField.becomeFirstResponder()
+        
+        // make fonts extra light
         billField.font = UIFont.systemFont(ofSize: 64, weight: UIFontWeightUltraLight)
         tipTitleLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFontWeightUltraLight)
         totalTitleLabel.font = UIFont.systemFont(ofSize: 23, weight: UIFontWeightUltraLight)
@@ -126,16 +132,10 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-  
-//    @IBAction func onTap(_ sender: Any) {
-//        view.endEditing(true)
-//    }
     
-    // call on every bill edit
+    // call on every edit of the bill field
     @IBAction func calculateTip(_ sender: AnyObject) {
-        
         let selectedCurrency = currencyControl.titleForSegment(at: currencyControl.selectedSegmentIndex)
         
         let tipPercentages = [0.18, 0.2, 0.25]
@@ -165,7 +165,6 @@ class ViewController: UIViewController {
         newBillLabel.text = selectedCurrency! + formattedBill!
         tipLabel.text = selectedCurrency! + formattedTip!
         totalLabel.text = selectedCurrency! + formattedTotal!
-//        billField.text = "$" + formattedBill!
     }
 
 

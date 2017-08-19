@@ -18,11 +18,13 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set default tip amounts from the default storage
         tipDefaultInput.text = defaults.string(forKey: "default1")
         tipDefaultInput2.text = defaults.string(forKey: "default2")
         tipDefaultInput3.text = defaults.string(forKey: "default3")
-        // Do any additional setup after loading the view.
         
+        // set the theme from the default storage
         themeControl.selectedSegmentIndex = defaults.integer(forKey: "theme")
     }
 
@@ -31,36 +33,33 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // if the first default tip amount was edited, store new default
     @IBAction func changeDefault(_ sender: AnyObject) {
         let default1 = Double(tipDefaultInput.text!)
         defaults.set(default1, forKey: "default1" )
-        print("default set 1")
-        print(defaults.string(forKey: "default1") ?? "no default 1 was set")
         defaults.synchronize()
-
     }
     
+    // if the second default tip amount was edited, store new default
     @IBAction func changeDefault2(_ sender: Any) {
         let default2 = Double(tipDefaultInput2.text!)
         defaults.set(default2, forKey: "default2" )
-        print("default set 2")
-        print(defaults.string(forKey: "default2") ?? "no default 2 was set")
         defaults.synchronize()
     }
 
+    // if the third default tip amount was edited, store new default
     @IBAction func changeDefault3(_ sender: Any) {
         let default3 = Double(tipDefaultInput3.text!)
         defaults.set(default3, forKey: "default3" )
         defaults.synchronize()
     }
     
+    // if the theme setting was updated, store new theme
      @IBAction func changeTheme(_ sender: AnyObject) {
         if (themeControl.selectedSegmentIndex == 0) {
-            print("fun")
             defaults.set(0, forKey: "theme" )
         }
         if (themeControl.selectedSegmentIndex == 1) {
-            print("plain")
             defaults.set(1, forKey: "theme" )
         }
      }
